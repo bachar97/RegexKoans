@@ -7,7 +7,7 @@ describe("Grouping", function() {describe
   
   it('the cat is optional', function() {
     
-    const fixThisPattern = /^DogCatPony$/;
+    const fixThisPattern = /^Dog(Cat)?Pony$/;
     
     expect( 'DogCatPony' ).toMatch(fixThisPattern);
     expect( 'DogPony'    ).toMatch(fixThisPattern);
@@ -15,7 +15,7 @@ describe("Grouping", function() {describe
   
   it('anything goes as long as we get to keep the pony', function() {
     
-    const fixThisPattern = /^DogCatPony$/;
+    const fixThisPattern = /^(Dog)*(Cat)*Pony$/;
     
     expect( 'DogCatPony'          ).toMatch(fixThisPattern);
     expect( 'DogPony'             ).toMatch(fixThisPattern);
@@ -25,7 +25,7 @@ describe("Grouping", function() {describe
   
   it('you can nest regular expression operations inside ( )', function() {
     
-    const fixThisPattern = /^DogCatPony$/;
+    const fixThisPattern = /^(Dog)*(Cat(s)?)*Pony$/;
     
     expect( 'DogCatPony'           ).toMatch(fixThisPattern);
     expect( 'DogCatsPony'          ).toMatch(fixThisPattern);
@@ -36,7 +36,7 @@ describe("Grouping", function() {describe
   
   it('you can nest ( ) inside ( )', function() {
     
-    const fixThisPattern = /^___$/;
+    const fixThisPattern = /^(ab(cd)?)*$/;
     
     expect( 'abcd'           ).toMatch(fixThisPattern);
     expect( 'abcdabcdabcd'   ).toMatch(fixThisPattern);
@@ -61,7 +61,7 @@ describe("Grouping", function() {describe
     // rules we care about for email addresses, so our regex doesn't need
     // to worry about all the other stuff.
     
-    const fixThisPattern = /^___$/;
+    const fixThisPattern = /^[a-z0-9_\-.+]+@[a-z0-9]+(\.[a-z0-9]+)+$/;
     
     // Hint: Develop the regex in pieces. First make a pattern that
     // matches the username part, then one section of the domain,

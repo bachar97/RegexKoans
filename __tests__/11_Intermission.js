@@ -20,12 +20,12 @@ describe("Intermission", function() {
     //   * Comma separating City and State is optional
     //   * US State will always use two uppercase letter abbreviation
     
-    const fixThisPattern = /___/;
+    const fixThisPattern = /^ ([\w\s.\?]+)+,? ([A-Z]{2})+ (([0-9]{5})+([\-0-9]+)?)/;
     
     // in matches1[cityGroup], etc., set the index to find each value
-    const cityGroup  = ___;
-    const stateGroup = ___;
-    const zipGroup   = ___;
+    const cityGroup  = 1;
+    const stateGroup = 2;
+    const zipGroup   = 3;
     
     const matches1 = fixThisPattern.exec(' Columbus, OH 43215'           );
     const matches2 = fixThisPattern.exec(' San Francisco, CA 94118-4503' );
@@ -76,14 +76,14 @@ describe("Intermission", function() {
     //   * query string (GET parameters) is optional
     //   * any missing value will be "" (instead of null)
     
-    const fixThisPattern = /^(http)(:)/;
+    const fixThisPattern = /^(https?|s?ftp|ssh):\/\/(\d{1,3}(\.\d{1,3}){3}|[\w]+(\.[\w]+)*)((:\d+)?)\/(([^\/?]+\/)*)(([\w.a-zA-Z0-9]+)?)((\?.*)?)$/;
     
-    const protocolGroupIndex  = ___;
-    const serverGroupIndex    = ___;
-    const portGroupIndex      = ___;
-    const directoryGroupIndex = ___;
-    const fileGroupIndex      = ___;
-    const queryGroupIndex = ___;
+    const protocolGroupIndex  = 1;
+    const serverGroupIndex    = 2;
+    const portGroupIndex      = 5;
+    const directoryGroupIndex = 7;
+    const fileGroupIndex      = 9;
+    const queryGroupIndex = 11;
     
     // valid
     const matches1 = fixThisPattern.exec( 'http://www.google.com/'                                );

@@ -42,8 +42,6 @@ describe("Looking Ahead", function() {
     
     expect( str1 ).toMatch(lookaheadPattern);
     expect( str2 ).not.toMatch(lookaheadPattern);
-    
-    expect(1).toEqual(2); // remove this line to continue the tutorial
   });
   
   // The Koan above could easily be matched with a pattern without any lookahead
@@ -66,7 +64,7 @@ describe("Looking Ahead", function() {
     const str3 = 'Abcd9';
     const str4 = '12345';
     
-    const fixThisPattern = /___/;
+    const fixThisPattern = /(?=.*[A-Z])(?=.*[\d])/;
     
     // Hint: Just like any other Regex element, the lookahead element is position-
     // specific. See the "qu" example above: the "u" must be present in exactly
@@ -91,7 +89,7 @@ describe("Looking Ahead", function() {
     //   * Must be between 6 and 16 characters long
     //   * Any non-whitespace character is allowed
     
-    const fixThisPattern = /___/;
+    const fixThisPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])\S{6,16}$/;
     
     expect( 'abcXYZ123'        ).toMatch(fixThisPattern);
     expect( '89ghV.'           ).toMatch(fixThisPattern);
@@ -113,8 +111,9 @@ describe("Looking Ahead", function() {
   it('find the id of every IMG tag without an "alt" attribute', function() {
     // Assume every IMG tag has an id defined
     
-    const fixThisPattern = /___/;
-    const idGroupIdx = ___;
+    const fixThisPattern = /^<img src="[^"]*" id="([^"]+)(?!.*alt="[^"]*").*$/;
+    
+    const idGroupIdx = 1;
     
     const matches1 = fixThisPattern.exec( '<img src="pic.jpg" id="my_pic"/>'                        );
     const matches2 = fixThisPattern.exec( '<img src="http://localhost/somepic.gif" id="localPic"/>' );
@@ -132,8 +131,8 @@ describe("Looking Ahead", function() {
     //   * If & is already part of an &...; escape sequence, don't escape it
     //   * & escape sequences are always &, followed by some number of letters, then ;
     
-    const fixThisPattern = /___/;
-    const escaped = '___';
+    const fixThisPattern = /&(?![a-zA-Z]+;)/g;
+    const escaped = '&amp;';
     
     const str1 = 'Strunk & White'.replace(fixThisPattern, escaped);
     const str2 = 'This &amp; is already escaped.'.replace(fixThisPattern, escaped);
@@ -155,8 +154,8 @@ describe("Looking Ahead", function() {
     
     // Hint: You will need to use $n references to capture groups to solve this
     
-    const fixThisPattern = /___/;
-    const replacementString = '___';
+    const fixThisPattern = /^<img(?![^>]*alt="[^"]*")(.*?)( src="([^"]+)")(.*)$/;
+    const replacementString = '<img alt="$3"$1$2$4';
     
     const str1 = '<img src="pic.jpg"/>'.replace(fixThisPattern, replacementString);
     const str2 = '<img src="trickyPic.jpg"/> src="Not it!" alt="Tricky!"'.replace(fixThisPattern, replacementString);
